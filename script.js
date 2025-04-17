@@ -16,7 +16,10 @@ window.onload = function () {
     var canvas = document.createElement("canvas");
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
-    canvas.style.border = "1px solid";
+    canvas.style.border = "30px solid gray";
+    canvas.style.margin = '50px auto';
+    canvas.style.display = 'block';
+    canvas.style.backgroundColor = '#ddd';
     document.body.appendChild(canvas);
     ctx = canvas.getContext("2d");
     snakee = new Snake(
@@ -49,9 +52,9 @@ window.onload = function () {
        while(applee.isOnSnake(snakee))
       }
       ctx.clearRect(0,0, canvasWidth , canvasHeight);
+      drawScore();
       snakee.draw();
       applee.draw();
-      drawScore();
       setTimeout(refreshCanvas, delay);
     }
 
@@ -59,8 +62,19 @@ window.onload = function () {
 
   function gameOver() {
     ctx.save();
-    ctx.fillText("Game Over", 5  , 15);
-    ctx.fillText("Appuyer sur la touche espace pour rejouer" , 5 , 30);
+    ctx.font = 'bold 70px sans-serif';
+    ctx.fillStyle =  '#000';
+    ctx.textAlign =  'center';
+    ctx.textBaseline = 'middle';
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 5 ;
+    var centerX = canvasWidth / 2;
+    var centerY = canvasHeight / 2;
+    ctx.strokeText("Game Over", centerX  , centerY - 180);
+    ctx.fillText("Game Over", centerX  , centerY - 180);
+    ctx.font = 'bold 30px sans-serif';
+    ctx.strokeText("Appuyer sur la touche espace pour rejouer" , centerX , centerY - 120);
+    ctx.fillText("Appuyer sur la touche espace pour rejouer" , centerX , centerY - 120);
     ctx.restore();
   }
 
@@ -83,7 +97,13 @@ window.onload = function () {
 
   function drawScore(){
     ctx.save();
-    ctx.fillText(score.toString(), 5  , canvasHeight - 5);
+    ctx.font = 'bold 200px sans-serif';
+    ctx.fillStyle =  'gray';
+    ctx.textAlign =  'center';
+    ctx.textBaseline = 'middle';
+    var centerX = canvasWidth / 2;
+    var centerY = canvasHeight / 2;
+    ctx.fillText(score.toString(), centerX  , centerY);
     ctx.restore();
   }
 
